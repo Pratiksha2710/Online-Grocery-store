@@ -1,0 +1,251 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    /* Remove the navbar's default rounded borders and increase the bottom margin */ 
+    .navbar {
+      margin-bottom: 50px;
+      border-radius: 0;
+    }
+  
+    .bg-img {
+      /* The image used */
+      background-image: url('{% static "bg.jpg" %}');
+
+      min-height: 550px;
+
+      /* Center and scale the image nicely */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      /* Needed to position the navbar */
+      position: relative;
+}
+   
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+    .panel-body{
+      /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
+      max-width: 100%;
+      max-height: 100%;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      border-radius: 30px;
+      font-family: arial;
+      
+
+    }
+    .pname{
+      color:  #8C55AA;
+      font-size: 22px;
+    }
+    .container{
+      width: 800px;
+      padding: 10px 16px;
+     
+    }
+    .col-sm-4{
+      padding:40px;
+    }
+    /*footer section*/
+    .footer{
+      background-color: 	#D3D3D3;
+      font-family: Apple Chancery, cursive;
+    }
+    .footer .box-container{
+      border: 0px solid;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr));
+      gap: 1.5rem;
+    }
+    .footer .box-container .box h3{
+      font-size: 25px;
+      color: #660066;
+      font-family: Apple Chancery, cursive;
+      padding: 1rem 0;
+    }
+    .footer .box-container .box p{
+      font-size: 18px;
+      font-family: 'Times New Roman', Times, serif;
+      line-height: 1.8;
+      /* color: #660066;
+      
+      padding: 1rem 0; */
+    }
+    .footer .box-container .box .links{
+      display: block;
+      font-size: 18px;
+      color: black;
+      font-family: Apple Chancery, cursive;
+      padding: 1rem 0;
+    }
+    .footer .box-container .box .links i{
+      color: black;
+      padding-right:.5rem ;
+    }
+    .footer .box-container .box .links:hover i{
+      padding-right:2rem;
+    }
+    .footer .box-container .box .share a{
+      border: 0px solid;
+      height: 4rem;
+      width: 4rem;
+      line-height: 4rem;
+      border-radius: .5rem;
+      font-size: 25px;
+      color: white;
+      margin-left: .4rem;
+      background: #3399ff;
+      text-align: center;
+    }
+    .footer .box-container .box .share a:hover{
+      background: #8C55AA;
+    }
+
+    .footer .credit{
+      text-align: center;
+      margin-top: 2rem;
+      padding: 1rem;
+      padding-top: 2.5rem;
+      font-size: 15px;
+      border-top: 1px solid black;
+
+    }
+    @media (max-width:991px)
+    {
+      .footer
+      {
+        text-align: center;
+      }
+    }
+
+     /*footer section*/
+    
+  </style>
+</head>
+<body>
+    <nav class="navbar navbar-inverse" style="font-family: Apple Chancery, cursive;background-color: 	 #660066;">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>                        
+            </button>
+            {%if "uname" in request.session%}
+            <a class="navbar-brand" href="#">Welcome {{request.session.uname}}</a>
+            {%else%}
+            <a class="navbar-brand" href="#" style="font-family: Apple Chancery, cursive;">GroceryStore</a>
+            {%endif%}
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+              
+              <li class="active"><a href="/">Home</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Products
+                    <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                    {%for cat in cats%}
+                      <li><a href="/ShowProducts/{{cat.id}}">{{cat.category_name}}</a></li>
+                    {%endfor%}
+                    </ul>
+                    {%if "uname" in request.session%}
+                      <li><a href="/ShowAllCartItems"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+                      <li><a href="signout"><span class="glyphicon glyphicon-user"></span>Sign Out</a></li>
+                      {%else%}
+                      <li><a href="/login"><span class="glyphicon glyphicon-user"></span> Login </a></li>
+                      <li><a href="/signup"><span class="glyphicon glyphicon-user"></span>Sign up </a></li>
+                    {%endif%}
+                  </li>
+                    
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+{% block content%}
+<div class="bg-img">
+  <div class="container text-center">
+    <h1 style="font-size: 50px; font-family: Apple Chancery, cursive;">
+      <scan style="color:red">Online</scan>
+      <scan style="color:green">Grocery</scan>
+      <scan style="color:blue">Store</scan></h1>      
+    <h2 style="font-family: Apple Chancery, cursive;">Fruits and Vegetables</h2>
+  </div>
+</div>
+<br>
+<br>
+<div class="container" style="font-family: Apple Chancery, cursive; background-color: #660066; width: 100%;" >    
+  <div class="row">
+    {%for product in products%}
+    <div class="col-sm-4" style="width:300px;" >
+      <a href="/ViewDetails/{{product.id}}">
+      <div class="panel panel-primary" >
+        <div class="panel-body">
+          <center><img src="{{product.image.url}}" class="img-responsive"    style="width:300px; height:150px; padding: 1px;margin: 0px;" alt="Avatar"></div></center>
+        <div class="panel-footer" style="background-color: whitesmoke;">
+          <p class="pname">{{product.pname}}</p>
+          <p>Price : {{product.price}}/kg</p>
+          <a href="/ViewDetails/{{product.id}}">View Details</a>
+        </div>
+      </div>
+    </a>
+    </div>
+    {%endfor%}
+  </div>
+</div><br><br>
+
+<section class="footer">
+  <div class="box-container">
+    <div class="box">
+      <h3>GroceryStore</h3>
+      <p>Online grocery shopping is a way of buying Fruits and Vegetables using a web-based shopping service.
+      </p>
+    </div>
+    
+    <div class="box">
+      <h3>Quik Links</h3>
+      <a href="#" class="links"><i class="fa fa-arrow-right"> Home</i></a>
+      <a href="#" class="links"><i class="fa fa-arrow-right"> Products</i></a>
+      <a href="#" class="links"><i class="fa fa-arrow-right"> Sign Up</i></a>
+      <a href="#" class="links"><i class="fa fa-arrow-right"> Login</i></a> 
+    </div>
+
+    <div class="box">
+      <h3>Contact Us</h3>
+      <a href="#" class="links"><i class="fa fa-phone"> +91 8530766787</i></a>
+      <a href="#" class="links"><i class="fa fa-envelope"> gotepratiksha@gmail.com</i></a>
+      <a href="#" class="links"><i class="fa fa-map-marker"> Pune,India</i></a>
+    </div>
+
+    <div class="box">
+      <h3>Follow Us</h3>
+      <div class="share">
+        <a href="#" class="fa fa-linkedin"></a>
+     
+      </div>
+     
+    </div>
+  </div>
+<div class="credit">Created by <span style="color: #8C55AA;"> Pratiksha </span><i class="fa fa-heart" style="font-size:15px;color:red"></i> | All Rights Reserved
+
+</div>
+</section>
+{%endblock%}
+</body>
+</html>

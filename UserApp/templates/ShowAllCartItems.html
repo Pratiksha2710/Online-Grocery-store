@@ -1,0 +1,140 @@
+{%extends "homepage.html"%}
+
+{%block content%}
+<script type="text/javascript">
+    function getConfirm(myid)
+    {
+        result = confirm("Are you sure you want to delete(y/n)?");
+        if(result)
+        {
+
+            myform = document.getElementById(myid);
+            myform.action = "/removeItem"
+            myform.submit();
+        }
+    }
+    function increment(myid)
+    {
+        txtQty = document.getElementById(myid);
+        if(txtQty.value<10)
+        {
+            txtQty.value = parseInt(txtQty.value)+1; 
+        }
+        
+    }
+    function decrement(myid)
+    {
+       txtQty = document.getElementById(myid);
+       if(txtQty.value>1)
+       {
+            txtQty.value = parseInt(txtQty.value)-1;
+       }
+       
+    }
+</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <center>
+        <h1 style="padding-top: 10px;
+        color: #8C55AA;
+        font-family: Apple Chancery, cursive;
+        font-weight: bold;
+        font-size: 30px;">Cart Details</h1>
+    </center>
+</head>
+<style>
+    body {
+    /* background-color: #F3EBF6; */
+    font-family: Apple Chancery, cursive;
+    background-image: url('static/bg4.jpg');
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    
+    }
+    .container{
+    min-height: 400px;
+    margin-top: 100px;
+    width: 80%;
+    height: 100%;
+    border-radius: 20px; 
+    background-color:  #F3EBF6;
+    margin: 7em auto;
+    border-radius: 1.5em;
+    box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+    margin-top: 20px; 
+    }
+     .mb-0{
+        margin-left: 60px;  
+    } 
+</style>
+<body>
+    <center>
+        <div class="container">
+            <table class="table">
+                <thead style="background-color: whitesmoke;">
+                    <tr>
+                        <th scope="col" class="border-0 bg-light">
+                            <div class="p-2 px-3 text-uppercase">Product</div>
+                        </th>
+                        <th scope="col" class="border-0 bg-light">
+                            <div class="py-2 text-uppercase">Price</div>
+                        </th>
+                        <th scope="col" class="border-0 bg-light">
+                            <div class="py-2 text-uppercase">Quantity(Kg)</div>
+                        </th>
+                        <th scope="col" class="border-0 bg-light">
+                            <div class="py-2 text-uppercase">Price per Product</div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                        <form method="post" id="myform{{item.product.id}}">
+                            {%csrf_token%}
+                        <tr>
+                            <th scope="row" class="border-0">
+                                <div class="p-2">
+                                    <img src="{{item.product.image.url}}" alt="" width="200"style="border-radius: 10px">
+                                        <div class="ml-3 d-inline-block align-middle">
+                                            <h5 class="mb-0">
+                                                <input type="hidden" name="productid" value="{{item.product.id}}"/>
+                                                <b>{{item.product.pname}}</b></h5>
+                                        </div>
+                                </div>
+                            </th>
+                            <td class="border-0 align-middle" ><strong>&#8377 {{item.product.price}}/kg</strong></td>
+                            <td class="border-0 align-middle" align="center">
+                                <button class="btn btn-warning" type="button" onclick="decrement('qty{{item.product.id}}')"> - </button>
+                                <strong><input type="text" name ="qty" id = "qty{{item.product.id}}" value="{{item.qty}}" size="4"/></strong>
+                                <button class="btn btn-warning" type="button" onclick="increment('qty{{item.product.id}}')"> + </button>
+                                <button class="btn btn-danger" type="submit" 
+                                name="action" value="update" style= "background: linear-gradient(to right, #9C27B0, #E040FB);">Update</button>
+                            </td>
+
+                            <td class="border-0 align-middle"><strong>&#8377
+                                {%widthratio item.qty 1 item.product.price%}</strong></td>
+                            <td><button class="btn btn-danger" type="button" onclick="getConfirm('myform{{item.product.id}}')" name="action" value="remove">Remove</button></td>
+
+                        </tr>
+                        </form>
+                        {% endfor %}
+                        </tbody>
+            </table>
+            <hr/>
+            <h3>Total : {{request.session.total}}</h3>
+            <hr/>
+            <a href="/MakePayment" class="btn btn-success">Proceed to make payment</a>
+    </center>
+
+</body>
+
+</html>
+{%endblock%}

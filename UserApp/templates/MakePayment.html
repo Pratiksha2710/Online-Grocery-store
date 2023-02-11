@@ -1,0 +1,175 @@
+{%extends "homepage.html"%}
+
+{%block content%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+        background-image: url('static/bg2.jpg');
+        position: relative;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        font-family: Apple Chancery, cursive;
+    }
+
+    .main {
+        background-color: #FFFFFF;
+        width: 400px;
+        height: 100%;
+        margin: 7em auto;
+        border-radius: 10px;
+        box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+        margin-top: 20px; 
+    }
+
+    .title {
+        padding-top: 40px;
+        color: #33CC33;
+        font-family:  Apple Chancery, cursive;
+        font-weight: bold;
+        font-size: 30px;
+        
+    }
+
+    .cardno{
+        width: 76%;
+        color: rgb(38, 50, 56);
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 1px;
+        background: rgba(136, 126, 126, 0.04);
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        outline: none;
+        box-sizing: border-box;
+        border: 1px solid #33CC66;
+        margin-bottom: 50px;
+        margin-left: 46px;
+        text-align: center;
+        margin-bottom: 27px;
+        font-family: Apple Chancery, cursive;
+    }
+
+    form.form1 {
+        padding-top: 40px;
+    }
+
+    .cvv {
+        width: 76%;
+        color: rgb(38, 50, 56);
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 1px;
+        background: rgba(136, 126, 126, 0.04);
+        padding: 10px 20px;
+        border: 1px solid ;
+        border-radius: 5px;
+        outline: none;
+        box-sizing: border-box;
+        border: 1px solid #33CC66;
+        margin-bottom: 50px;
+        margin-left: 46px;
+        text-align: center;
+        margin-bottom: 27px;
+        font-family: Apple Chancery, cursive;
+    }
+    .expiry{
+        width: 76%;
+        color: rgb(38, 50, 56);
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 1px;
+        background: rgba(136, 126, 126, 0.04);
+        padding: 10px 20px;
+        border: 1px solid ;
+        border-radius: 5px;
+        outline: none;
+        box-sizing: border-box;
+        border: 1px solid #33CC66;
+        margin-bottom: 50px;
+        margin-left: 46px;
+        text-align: center;
+        margin-bottom: 27px;
+        font-family: Apple Chancery, cursive;
+    }
+
+    .cardno:focus, .cvv:focus, .expiry:focus {
+        border: 1px solid #336633!important;
+        color: #8C55AA;
+    }
+
+    .btn btn-success {
+        cursor: pointer;
+        border-radius: 5px;
+        color: #fff;
+        background:  #33CC66;
+        border: 0;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        font-family: Apple Chancery, cursive;
+        margin-left: 35%;
+        font-size: 15px;
+        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+        outline: none;
+    }
+    .amount{
+        text-align: center;
+        background-color: #e6ffe6;
+        padding: 10px 10px;
+        margin: 20px 50px;
+        font-family: Apple Chancery, cursive;
+       
+    }
+    button:hover{
+        color: aliceblue;
+    }
+
+    @media (max-width: 600px){
+        .main {
+            border-radius: 0px;
+        }}
+
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h1 class="title" align="center">Make Payment</h1>
+        <br>
+       <form  method="post" >
+            {%csrf_token%}
+            <input class="cardno" type="text" align="center" placeholder="Enter Card No"  name="cardno" required>
+            <input class="cvv" type="text" align="center" placeholder="Enter CVV" name="cvv" required>
+            <input class="expiry" type="text" align="center" placeholder="Enter Expiry"  name="expiry" required>
+            <br>
+            <h4 class="amount"><b>Total : {{request.session.total}}</b></h4>
+            <button type="submit" class="btn btn-success" style="margin-left: 150px;">Pay Now</button>
+            <br>
+            <br>
+
+
+
+        </form>
+        
+    </div>
+</body>
+</html>
+{%endblock%}
+
+
+
+
+
+
+
+
+

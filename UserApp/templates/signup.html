@@ -1,0 +1,167 @@
+{%extends "homepage.html"%}
+
+{%block content%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+        font-family: Apple Chancery, cursive;
+        background-image: url('static/signup.jpg');
+        position: relative;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .main {
+        background-color: #F3EBF6;
+        width: 400px;
+        height: 420px;
+        margin: 7em auto;
+        border-radius: 1.5em;
+        box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+        margin-top: 20px; 
+    }
+
+    .title {
+        padding-top: 40px;
+        color: #8C55AA;
+        font-family: Apple Chancery, cursive;
+        font-weight: bold;
+        font-size: 25px;
+    }
+
+    .login{
+        width: 76%;
+        color: rgb(38, 50, 56);
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 1px;
+        background: rgba(136, 126, 126, 0.04);
+        padding: 10px 20px;
+        border: none;
+        border-radius: 20px;
+        outline: none;
+        box-sizing: border-box;
+        border: 2px solid #E1BEE7;
+        margin-bottom: 50px;
+        margin-left: 46px;
+        text-align: center;
+        margin-bottom: 27px;
+        font-family: Apple Chancery, cursive;
+    }
+
+    form.form1 {
+        padding-top: 40px;
+    }
+
+    .pass {
+        width: 76%;
+        color: rgb(38, 50, 56);
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 1px;
+        background: rgba(136, 126, 126, 0.04);
+        padding: 10px 20px;
+        border: 1px solid ;
+        border-radius: 20px;
+        outline: none;
+        box-sizing: border-box;
+        border: 2px solid #E1BEE7;
+        margin-bottom: 50px;
+        margin-left: 46px;
+        text-align: center;
+        margin-bottom: 27px;
+        font-family: Apple Chancery, cursive;
+    }
+    .email{
+        width: 76%;
+        color: rgb(38, 50, 56);
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 1px;
+        background: rgba(136, 126, 126, 0.04);
+        padding: 10px 20px;
+        border: 1px solid ;
+        border-radius: 20px;
+        outline: none;
+        box-sizing: border-box;
+        border: 2px solid #E1BEE7;
+        margin-bottom: 50px;
+        margin-left: 46px;
+        text-align: center;
+        margin-bottom: 27px;
+        font-family: Apple Chancery, cursive;
+    }
+
+    .login:focus, .pass:focus, .email:focus {
+        border: 2px solid rgba(0, 0, 0, 0.18) !important;
+        color: #8C55AA;
+    }
+
+    .submit {
+        cursor: pointer;
+        border-radius: 5em;
+        color: #fff;
+        background: linear-gradient(to right, #9C27B0, #E040FB);
+        border: 0;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        font-family: Apple Chancery, cursive;
+        margin-left: 35%;
+        font-size: 15px;
+        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+        outline: none;
+        
+        
+    }
+    button:hover{
+        color: aliceblue;
+    }
+
+    @media (max-width: 600px){
+        .main {
+            border-radius: 0px;
+        }}
+
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h1 class="title" align="center">SignUp</h1>
+        <br>
+       <form  method="post" >
+            {%csrf_token%}
+            <input class="login " type="text" align="center" placeholder="Login ID"  name="uname" required>
+            <input class="pass" type="text" align="center" placeholder="Password" name="password"  required >
+            <input class="email " type="email" align="center" placeholder="Email ID" required name="email">
+            <br>
+            <br>
+            <button type="submit" class="submit">Sign Up</button>
+            <br>
+
+
+
+        </form>
+        
+    </div>
+</body>
+</html>
+{%endblock%}
+
+
+
+
+
+
+
+
+

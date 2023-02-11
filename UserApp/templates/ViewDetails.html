@@ -1,0 +1,117 @@
+{%extends "homepage.html"%}
+
+{%block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Document</title>
+    <center>
+        <h1 style="padding-top: 20px;
+        color: #8C55AA;
+        font-family: Apple Chancery, cursive;
+        font-weight: bold;
+        font-size: 30px;">Product Details</h1>
+    </center>
+</head>
+<style>
+    body {
+    background-color: #F3EBF6;
+    font-family: Apple Chancery, cursive;
+    background-image: url('static/bg4.jpg');
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    }
+    .container{
+        margin-top: 100px;
+        background-color: #FFF0F5;
+        min-height: 400px;
+        margin-top: 10px;
+        width: 800px;
+        height: 410px;
+        border-radius: 20px; 
+        background-color: #FFFFFF;
+        margin: 7em auto;
+        border-radius: 1.5em;
+        box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+        margin-top: 20px; 
+    }
+   .table{
+    width: 90%;
+    border: 1px solid white;
+    margin-top: 20px;
+   }
+   table, th, td {
+    border: 1px solid white;
+    border-collapse: collapse;
+    padding: 10px;
+    margin: 20px;
+}
+.btn btn-success{
+        cursor: pointer;
+        border-radius: 5em;
+        color: #fff;
+        background: linear-gradient(to right, #9C27B0, #E040FB);
+        border: 0;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        font-family: Apple Chancery, cursive;
+        margin-left: 35%;
+        font-size: 15px;
+        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+        outline: none;
+}
+</style>
+<body>
+    <center>
+    <form method="post" action="/addToCart">
+        {%csrf_token%}
+    <div class="container">
+        <table class="table">
+            <tr>
+                <th rowspan="6"><img src="{{product.image.url}}" width="80%" style="margin-top: 20px; margin-left: 50px;"></th>
+            </tr>
+            <tr>
+                <td style="height:40px; font-size: 15px; color: #8C55AA;
+                font-family: Apple Chancery, cursive;
+                font-size: 30px;">{{product.pname}}</td>
+            </tr>
+            <tr>
+                <td style="height:40px;font-size: 18px; color: green; font-family: 'Ubuntu', sans-serif;"><strong>Rs.{{product.price}}/kg</strong></td>
+            </tr>
+            <tr>
+                <td style="height:40px; font-size: 15px;"><b>{{product.description}}</b></td>
+            </tr>
+            <tr>
+                <td style="height:40px; font-size: 15px;"><b>Quantity</b><select name="qty" class="form-control">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option></select></td>
+            </tr>
+            <tr>
+                <td style="height:40px">
+                    <button type="submit" class="btn btn-success" style="background:linear-gradient(to right, #9C27B0, #E040FB);">Add To Cart</button></td>
+                <td><input type="hidden" name="productid" value="{{product.id}}"/></td>
+            </tr>
+
+        </table>
+    </div>
+    </form>
+</center>
+
+</body>
+
+</html>
+{%endblock%}
+
+
+
